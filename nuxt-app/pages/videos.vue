@@ -1,0 +1,3 @@
+<template>
+    Videos
+</template>
