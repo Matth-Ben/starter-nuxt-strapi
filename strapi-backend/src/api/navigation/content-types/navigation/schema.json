@@ -4,7 +4,8 @@
   "info": {
     "singularName": "navigation",
     "pluralName": "navigations",
-    "displayName": "Navigation"
+    "displayName": "Navigation",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -16,6 +17,16 @@
     },
     "path": {
       "type": "string"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

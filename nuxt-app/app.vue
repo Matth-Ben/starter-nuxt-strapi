@@ -32,21 +32,3 @@ onMounted(async () => {
     }
 })
 </script>
-
-<style>
-header, footer {
-    padding: 20px;
-    background: #f4f4f4;
-    text-align: center;
-}
-
-nav a {
-    margin: 0 10px;
-    text-decoration: none;
-    color: #333;
-}
-
-footer {
-    margin-top: 40px;
-}
-</style>

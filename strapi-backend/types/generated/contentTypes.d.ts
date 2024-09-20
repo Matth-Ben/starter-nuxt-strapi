@@ -491,13 +491,18 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
     singularName: 'about';
     pluralName: 'abouts';
     displayName: 'About';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     about_title: Schema.Attribute.String;
+    about_descr: Schema.Attribute.Blocks;
+    about_highlighted: Schema.Attribute.Blocks;
     about_content: Schema.Attribute.Blocks;
+    videos: Schema.Attribute.Relation<'oneToMany', 'api::video.video'>;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -516,6 +521,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     singularName: 'homepage';
     pluralName: 'homepages';
     displayName: 'Homepage';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -523,10 +529,7 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
   attributes: {
     hero_title: Schema.Attribute.String;
     hero_description: Schema.Attribute.Blocks;
-    hero_image: Schema.Attribute.Media<
-      'images' | 'files' | 'videos' | 'audios',
-      true
-    >;
+    videos: Schema.Attribute.Relation<'oneToMany', 'api::video.video'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -574,6 +577,7 @@ export interface ApiNavigationNavigation extends Struct.CollectionTypeSchema {
     singularName: 'navigation';
     pluralName: 'navigations';
     displayName: 'Navigation';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -581,6 +585,7 @@ export interface ApiNavigationNavigation extends Struct.CollectionTypeSchema {
   attributes: {
     intitule: Schema.Attribute.String;
     path: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
@@ -602,6 +607,7 @@ export interface ApiVideoVideo extends Struct.CollectionTypeSchema {
     singularName: 'video';
     pluralName: 'videos';
     displayName: 'Video';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -611,6 +617,7 @@ export interface ApiVideoVideo extends Struct.CollectionTypeSchema {
     description: Schema.Attribute.Blocks;
     video_url: Schema.Attribute.String;
     thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    slug: Schema.Attribute.UID<'title'>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

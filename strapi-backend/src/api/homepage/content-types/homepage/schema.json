@@ -4,7 +4,8 @@
   "info": {
     "singularName": "homepage",
     "pluralName": "homepages",
-    "displayName": "Homepage"
+    "displayName": "Homepage",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,15 +18,10 @@
     "hero_description": {
       "type": "blocks"
     },
-    "hero_image": {
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ],
-      "type": "media",
-      "multiple": true
+    "videos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::video.video"
     }
   }
 }

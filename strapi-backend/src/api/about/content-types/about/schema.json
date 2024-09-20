@@ -4,7 +4,8 @@
   "info": {
     "singularName": "about",
     "pluralName": "abouts",
-    "displayName": "About"
+    "displayName": "About",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,8 +15,29 @@
     "about_title": {
       "type": "string"
     },
+    "about_descr": {
+      "type": "blocks"
+    },
+    "about_highlighted": {
+      "type": "blocks"
+    },
     "about_content": {
       "type": "blocks"
+    },
+    "videos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::video.video"
+    },
+    "image": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }
