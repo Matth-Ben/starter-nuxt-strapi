@@ -1,7 +1,7 @@
 <!-- pages/index.vue -->
 <template>
     <div>
-        <h1 class="text-4xl font-bold text-blue-500">{{ homepage.hero_title }}</h1>
+        <h1 class="text-4xl font-bold text-primary font-sans">{{ homepage.hero_title }}</h1>
         <p v-for="paragraph in homepage.hero_description" :key="paragraph">
             {{ paragraph.children[0].text }}
         </p>

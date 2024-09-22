@@ -10,7 +10,23 @@ export default {
     './app.{js,ts,vue}',
   ],
   theme: {
-    extend: {},
+    colors: {
+      'primary': '#6D6D46',
+      'white': '#F2F1EC',
+    },
+    fontFamily: {
+      sans: ['Inter', 'sans-serif'],
+      serif: ['PP Editorial Old', 'serif'],
+    },
+    extend: {
+      spacing: {
+        '8xl': '96rem',
+        '9xl': '128rem',
+      },
+      borderRadius: {
+        '4xl': '2rem',
+      }
+    }
   },
   plugins: [],
 }

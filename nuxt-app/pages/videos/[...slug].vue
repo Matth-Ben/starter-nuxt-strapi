@@ -24,9 +24,6 @@
   import { ref, onMounted } from 'vue'
   import { useRoute } from 'vue-router'
 
-  console.log('Video page');
-  
-  
   // Utiliser le slug de l'URL pour récupérer les données de la vidéo
   const route = useRoute()
   const slug = route.params.slug

@@ -1,32 +1,46 @@
 export default defineNuxtPlugin((nuxtApp) => {
     if (process.server) return
+
     // Créer une superposition de débogage
     const debugOverlay = document.createElement('div')
-    debugOverlay.style.position = 'fixed'
-    debugOverlay.style.top = '0'
-    debugOverlay.style.left = '0'
-    debugOverlay.style.width = '100vw'
-    debugOverlay.style.height = '100vh'
-    debugOverlay.style.backgroundColor = 'rgba(0, 0, 0, 0.8)'
-    debugOverlay.style.color = '#fff'
-    debugOverlay.style.display = 'none'
-    debugOverlay.style.justifyContent = 'center'
-    debugOverlay.style.alignItems = 'center'
-    debugOverlay.style.fontSize = '24px'
-    debugOverlay.style.zIndex = '9999'
-    debugOverlay.innerHTML = '<div>Debug Mode Activated</div>'
-  
+    debugOverlay.classList.add('grid-helper')
+
+    // Contenu de la grille
+    debugOverlay.innerHTML = `
+        <div class="grid grid-cols-6 lg:grid-cols-12 gap-8 h-full">
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+            <div class="col-span-1 h-full bg-primary opacity-50"></div>
+        </div>
+    `
+
     document.body.appendChild(debugOverlay)
-  
-    // Fonction pour basculer la visibilité de l'overlay
+
+    // Fonction pour basculer entre les différents états de visibilité
+    let visibilityState = 'none' // none, active, active-more
     const toggleDebugOverlay = () => {
-        if (debugOverlay.style.display === 'none') {
-            debugOverlay.style.display = 'flex'
+        if (visibilityState === 'none') {
+            debugOverlay.classList.add('active')
+            visibilityState = 'active'
+        } else if (visibilityState === 'active') {
+            debugOverlay.classList.add('active-more')
+            visibilityState = 'active-more'
         } else {
-            debugOverlay.style.display = 'none'
+            debugOverlay.classList.remove('active')
+            debugOverlay.classList.remove('active-more')
+            visibilityState = 'none'
         }
     }
-  
+
     // Écouter les événements de touches
     document.addEventListener('keydown', (event) => {
         if (event.ctrlKey && event.key === 'g') {

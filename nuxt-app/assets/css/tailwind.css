@@ -1,3 +1,42 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html {
+    @apply bg-white text-primary;
+    font-size: 10px;
+}
+
+body {
+    font-size: 1.8rem;
+    line-height: 3.2rem;
+}
+
+.container {
+    width: 100%;
+    max-width: initial;
+    padding-left: 4rem;
+    padding-right: 4rem;
+}
+
+.grid-helper {
+    @apply container mx-auto fixed inset-0 w-full h-full opacity-20 z-[1000] invisible;
+
+    &::before {
+        @apply absolute top-0 left-0 w-full h-8 bg-[blue] opacity-60;
+        content: "";
+    }
+
+    &::after {
+        @apply absolute bottom-0 left-0 w-full h-8 bg-[green] opacity-60;
+        content: "";
+    }
+
+    &.active {
+        @apply visible;
+
+        &-more {
+            @apply opacity-40 visible;
+        }
+    }
+}

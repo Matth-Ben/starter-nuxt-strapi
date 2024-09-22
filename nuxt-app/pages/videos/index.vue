@@ -24,42 +24,35 @@
     </div>
   </template>
   
-  <script setup>
-  import { ref, onMounted } from 'vue'
-  
-  // Variable réactive pour stocker les vidéos
-  const videos = ref([])
-  
-  // Fonction pour obtenir l'URL complète de la miniature
-  const getImageUrl = (image) => {
-    return `http://localhost:1337${image.url}`
-  }
-  
-  // Récupérer les données lors du montage du composant
-  onMounted(async () => {
-    try {
-      // Récupérer les vidéos avec les miniatures
-      const response = await $fetch('http://localhost:1337/api/videos?populate=thumbnail')
+<script setup>
+import { ref, onMounted } from 'vue'
 
-      // Stocker les vidéos dans la variable réactive
-      if (response && response.data) {
-        console.log(response.data);
-        
-        videos.value = response.data
-      } else {
-        console.error('Aucune vidéo trouvée.')
-      }
+const videos = ref([])
+
+const getImageUrl = (image) => {
+    return `http://localhost:1337${image.url}`
+}
+
+onMounted(async () => {
+    try {
+        const response = await $fetch('http://localhost:1337/api/videos?populate=thumbnail')
+
+        if (response && response.data) {
+            videos.value = response.data
+        } else {
+            console.error('Aucune vidéo trouvée.')
+        }
     } catch (error) {
-      console.error('Erreur lors de la récupération des vidéos:', error)
+        console.error('Erreur lors de la récupération des vidéos:', error)
     }
-  })
-  </script>
+})
+</script>
   
-  <style scoped>
-  .thumbnail {
+<style scoped>
+.thumbnail {
     max-width: 100%;
     height: auto;
     margin-top: 10px;
-  }
-  </style>
+}
+</style>
   
