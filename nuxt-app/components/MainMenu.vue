@@ -1,6 +1,6 @@
 <template>
     <header>
-        <nav class="container">
+        <nav class="container py-8">
             <div class="relative z-50 flex items-center justify-between">
                 <NuxtLink @click="handleLinkClick" to="/">Victor Ravinet</NuxtLink>
                 <button @click="toggleMenu">{{ isMenuOpen ? 'Fermer' : 'Menu' }}</button>
@@ -14,12 +14,12 @@
                 <div v-if="isMenuOpen" class="menu">
                     <div class="relative h-full">
                         <ul class="menu--list">
-                            <li v-for="menuItem in menu" :key="menuItem.id">
-                                <NuxtLink :to="menuItem.path" @click="handleLinkClick">{{ menuItem.intitule }}</NuxtLink>
+                            <li class="menu--item" v-for="menuItem in menu" :key="menuItem.id">
+                                <NuxtLink :to="menuItem.path" @click="handleLinkClick" class="menu--link">{{ menuItem.intitule }}</NuxtLink>
                             </li>
                         </ul>
 
-                        <div class="absolute bottom-16 left-1/2 -translate-x-1/2">Say Hello</div>
+                        <div class="absolute bottom-16 left-1/2 -translate-x-1/2 italic text-[2.4rem]">Say Hello</div>
                     </div>
                 </div>
             </Transition>
@@ -75,5 +75,17 @@ onMounted(async () => {
 
 .menu-slide-leave-to {
     @apply -translate-y-full;
+}
+
+.menu--list {
+    @apply flex items-center justify-center w-full h-full;
+}
+
+.menu--item {
+    @apply block w-full h-full;
+}
+
+.menu--link {
+    @apply flex items-center justify-center w-full h-full italic text-[2rem];
 }
 </style>
