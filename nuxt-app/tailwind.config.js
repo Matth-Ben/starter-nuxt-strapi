@@ -13,6 +13,7 @@ export default {
     colors: {
       'primary': '#6D6D46',
       'white': '#F2F1EC',
+      'black': '#000',
     },
     fontFamily: {
       sans: ['Inter', 'sans-serif'],
