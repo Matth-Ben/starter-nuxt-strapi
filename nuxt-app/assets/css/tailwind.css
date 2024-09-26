@@ -20,7 +20,7 @@ body {
 }
 
 .grid-helper {
-    @apply container mx-auto fixed inset-0 w-full h-full opacity-20 z-[1000] invisible;
+    @apply container mx-auto fixed inset-0 w-full h-full opacity-20 z-[1000] invisible pointer-events-none;
 
     &::before {
         @apply absolute top-0 left-0 w-full h-8 bg-[blue] opacity-60;
