@@ -12,6 +12,18 @@ body {
     line-height: 3.2rem;
 }
 
+::selection {
+    @apply bg-primary text-white;
+}
+
+::-moz-selection {
+    @apply bg-primary text-white;
+}
+
+iframe {
+    @apply w-full h-full;
+}
+
 .container {
     width: 100%;
     max-width: initial;

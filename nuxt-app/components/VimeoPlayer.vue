@@ -60,8 +60,7 @@
   
 <style scoped>
     .vimeo-player {
-        max-width: 100%;
-        margin: 0 auto;
+        @apply block w-full h-full overflow-hidden rounded-[1rem];
     }
 </style>
   

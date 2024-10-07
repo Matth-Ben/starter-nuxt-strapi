@@ -12,9 +12,6 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "hero_title": {
-      "type": "string"
-    },
     "hero_description": {
       "type": "blocks"
     },
@@ -22,6 +19,9 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::video.video"
+    },
+    "hero_title": {
+      "type": "blocks"
     }
   }
 }

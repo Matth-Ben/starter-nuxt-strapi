@@ -527,9 +527,9 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    hero_title: Schema.Attribute.String;
     hero_description: Schema.Attribute.Blocks;
     videos: Schema.Attribute.Relation<'oneToMany', 'api::video.video'>;
+    hero_title: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;
