@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_custom_texte_et_liens",
+  "info": {
+    "displayName": "Texte et lien",
+    "icon": "bulletList"
+  },
+  "options": {},
+  "attributes": {
+    "Texte": {
+      "type": "string"
+    },
+    "Url": {
+      "type": "string"
+    }
+  }
+}

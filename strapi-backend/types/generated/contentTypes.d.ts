@@ -503,6 +503,7 @@ export interface ApiAboutAbout extends Struct.SingleTypeSchema {
     about_content: Schema.Attribute.Blocks;
     videos: Schema.Attribute.Relation<'oneToMany', 'api::video.video'>;
     image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    Contact: Schema.Attribute.Component<'custom.texte-et-lien', true>;
     createdAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     publishedAt: Schema.Attribute.DateTime;

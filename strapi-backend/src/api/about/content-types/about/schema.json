@@ -30,14 +30,21 @@
       "target": "api::video.video"
     },
     "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
+    },
+    "Contact": {
+      "displayName": "Texte et lien",
+      "type": "component",
+      "repeatable": true,
+      "component": "custom.texte-et-lien"
     }
   }
 }
