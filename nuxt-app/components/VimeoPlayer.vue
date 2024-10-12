@@ -60,7 +60,7 @@
   
 <style scoped>
     .vimeo-player {
-        @apply block w-full h-full overflow-hidden rounded-[1rem];
+        @apply block w-full h-full;
     }
 </style>
   
