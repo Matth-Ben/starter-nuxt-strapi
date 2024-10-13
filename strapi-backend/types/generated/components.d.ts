@@ -5,10 +5,12 @@ export interface CustomTexteEtLien extends Struct.ComponentSchema {
   info: {
     displayName: 'Texte et lien';
     icon: 'bulletList';
+    description: '';
   };
   attributes: {
     Texte: Schema.Attribute.String;
     Url: Schema.Attribute.String;
+    Target: Schema.Attribute.Boolean;
   };
 }
 
