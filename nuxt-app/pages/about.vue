@@ -43,10 +43,11 @@
                 </div>
             </div>
 
-            <!-- Vidéos -->
-            <div v-if="about.videos">
-                <div v-for="video in about.videos" :key="video.id">
-                    <VimeoPlayer :videoId="video.video_url" />
+            <!-- Vidéos avec animations GSAP -->
+            <div v-if="about.videos" class="video-wrapper">
+                <div v-for="(video, index) in about.videos" :key="video.id" class="video-container"
+                    :class="{'is-large': index === currentVideoIndex, 'is-small': index === nextVideoIndex}">
+                    <VimeoPlayer :videoId="video.video_url" @play="onVideoPlay(index)" />
                 </div>
             </div>
 
@@ -65,9 +66,10 @@
 </template>
   
 <script setup>
-    import { ref, onMounted } from 'vue'
+    import { ref, onMounted, nextTick } from 'vue'
     import VimeoPlayer from '~/components/VimeoPlayer.vue'
     import Marquee from '~/utils/marquee';
+    import gsap from 'gsap';
 
     const about = ref({
         about_title: '',
@@ -78,12 +80,46 @@
         image: null,
     })
 
+    const currentVideoIndex = ref(0);
+    const nextVideoIndex = ref(1);
     const marquee = ref(null);
     const arrowSVG = ref('')
 
     const getImageUrl = (image) => {
         return `http://localhost:1337${image.url}`
     }
+
+    // Animation GSAP pour les transitions
+    const animateVideos = (current, next) => {
+        const tl = gsap.timeline();
+
+        // Transition pour la vidéo actuelle (sortie)
+        tl.to(`.video-container.is-large`, {
+            scale: 0.5,
+            x: '50%',
+            duration: 1,
+            ease: 'power2.inOut'
+        });
+
+        // Transition pour la prochaine vidéo (entrée)
+        tl.to(`.video-container.is-small`, {
+            scale: 1,
+            x: '0%',
+            duration: 1,
+            ease: 'power2.inOut',
+            onComplete: () => {
+                currentVideoIndex.value = next;
+                nextVideoIndex.value = (next + 1) % about.value.videos.length;
+            }
+        }, '-=0.5');
+    };
+
+    // Gestion de la lecture des vidéos
+    const onVideoPlay = (index) => {
+        if (index !== currentVideoIndex.value) {
+            animateVideos(currentVideoIndex.value, index);
+        }
+    };
   
     onMounted(async () => {
         try {
@@ -103,8 +139,6 @@
 
             await nextTick();
 
-            console.log(about.value.contact);
-            
             if (marquee.value) {
                 new Marquee(marquee.value, 1);
             }
@@ -185,10 +219,36 @@
     }
 
     .link-svg {
-        @apply w-[2.2rem] h-[2.9rem];
+        @apply flex items-center justify-center w-[2.2rem] h-[2.9rem];
 
         path {
             @apply fill-primary transition duration-300 ease-in-out;
         }
+    }
+
+    .video-wrapper {
+        position: relative;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .video-container {
+        position: absolute;
+        transition: transform 1s ease;
+    }
+
+    .video-container.is-large {
+        width: 100%;
+        height: 85%;
+        z-index: 10;
+    }
+
+    .video-container.is-small {
+        width: 200px;
+        height: 120px;
+        bottom: 20px;
+        right: 20px;
+        z-index: 5;
+        transition: transform 1s ease;
     }
 </style>
