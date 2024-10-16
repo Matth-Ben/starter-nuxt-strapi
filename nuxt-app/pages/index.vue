@@ -131,7 +131,6 @@ onMounted(async () => {
         homepage.value.hero_title = data.hero_title
         homepage.value.hero_description = data.hero_description
         homepage.value.videos = data.videos
-        console.log(homepage.value.videos);
         
     } catch (error) {
         console.error('Erreur lors de la récupération des données:', error)

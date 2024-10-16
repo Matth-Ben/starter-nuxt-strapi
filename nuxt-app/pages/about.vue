@@ -4,7 +4,7 @@
         <div class="cover">
             <div class="relative flex justify-center w-full">
                 <div class="image relative z-10 aspect-[446/546] max-w-[44.6rem]" v-if="about.image">
-                    <img class="image-content" :src="getImageUrl(about.image)" alt="Image de la page About">
+                    <img class="image-content" :src="getImageUrl(about.image.url)" alt="Image de la page About">
                 </div>
 
                 <div ref="marquee" class="marquee">
@@ -45,9 +45,13 @@
 
             <!-- Vidéos avec animations GSAP -->
             <div v-if="about.videos" class="video-wrapper">
-                <div v-for="(video, index) in about.videos" :key="video.id" class="video-container"
-                    :class="{'is-large': index === currentVideoIndex, 'is-small': index === nextVideoIndex}">
-                    <VimeoPlayer :videoId="video.video_url" @play="onVideoPlay(index)" />
+                <div class="relative w-full h-full bg-primary rounded-[1rem] overflow-hidden">
+                    <nuxt-link class="absolute left-12 bottom-12 z-30 text-white italic" to="/videos">All my videos</nuxt-link>
+                    <div v-for="(video, index) in about.videos" :key="video.id" class="video-container"
+                        :class="{'is-large': index === currentVideoIndex, 'is-small': index !== currentVideoIndex}">
+                        <img v-if="video.thumbnail?.url" :src="getImageUrl(video.thumbnail.url)" alt="{{ video.thumbnail.name }}" class="video-thumbnail">
+                        <VimeoPlayer class="w-full h-full" :videoId="video.video_url" @play="onVideoPlay(index)" />
+                    </div>
                 </div>
             </div>
 
@@ -86,7 +90,7 @@
     const arrowSVG = ref('')
 
     const getImageUrl = (image) => {
-        return `http://localhost:1337${image.url}`
+        return `http://localhost:1337${image}`
     }
 
     // Animation GSAP pour les transitions
@@ -124,13 +128,14 @@
     onMounted(async () => {
         try {
             const response = await $fetch('http://localhost:1337/api/about?populate[image]=*&populate[videos]=*&populate[Contact]=*')
+            const responseThumbnail = await $fetch('http://localhost:1337/api/about?populate[videos][populate]=thumbnail')
             const data = response.data
         
             about.value.about_title = data.about_title
             about.value.about_descr = data.about_descr
             about.value.about_highlighted = data.about_highlighted
             about.value.about_content = data.about_content
-            about.value.videos = data.videos
+            about.value.videos = responseThumbnail.data.videos
             about.value.image = data.image
             about.value.contact = data.Contact
 
@@ -227,28 +232,25 @@
     }
 
     .video-wrapper {
-        position: relative;
-        width: 100%;
-        height: 100vh;
+        @apply relative w-full h-auto lg:h-screen aspect-video;
     }
 
     .video-container {
         position: absolute;
+        border-radius: 1rem;
+        overflow: hidden;
         transition: transform 1s ease;
     }
 
     .video-container.is-large {
-        width: 100%;
-        height: 85%;
-        z-index: 10;
+        @apply w-full h-full z-10;
+        border-radius: 1rem;
     }
 
     .video-container.is-small {
-        width: 200px;
-        height: 120px;
-        bottom: 20px;
-        right: 20px;
-        z-index: 5;
+        @apply bottom-12 right-12 z-20;
+        width: 25rem;
+        height: 14.5rem;
         transition: transform 1s ease;
     }
 </style>

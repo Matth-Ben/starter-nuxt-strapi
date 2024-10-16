@@ -1,5 +1,5 @@
 <template>
-    <header class="fixed top-0 z-50 w-full">
+    <header class="absolute top-0 z-50 w-full">
       <nav class="container py-8">
         <div class="relative z-50 flex items-center justify-between">
           <NuxtLink @click="handleLinkClick" to="/">Victor Ravinet</NuxtLink>

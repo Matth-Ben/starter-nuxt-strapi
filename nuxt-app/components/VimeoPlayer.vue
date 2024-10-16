@@ -26,7 +26,6 @@
     const createPlayer = (id) => {
         player = new Player(vimeoContainer.value, {
             id: id,
-            width: 640,
             loop: false,
             autoplay: false,
             muted: false

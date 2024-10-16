@@ -24,6 +24,10 @@ iframe {
     @apply w-full h-full;
 }
 
+img {
+    @apply w-full h-full object-cover;
+}
+
 .container {
     width: 100%;
     max-width: initial;
