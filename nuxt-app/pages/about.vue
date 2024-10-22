@@ -232,7 +232,7 @@
     }
 
     .video-wrapper {
-        @apply relative w-full h-auto lg:h-screen aspect-video; 
+        @apply relative w-full h-auto lg:h-screen aspect-video;
     }
 
     .video-container {
